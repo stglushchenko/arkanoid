@@ -13,6 +13,8 @@ public class UIManager : Singleton<UIManager>
 
     [SerializeField] private PauseMenu pauseMenu;
 
+    [SerializeField] private EndGameMenu endGameMenu;
+
     public Events.EventFadeComplete OnMainMenuFadeComplete;
 
     void Start()
@@ -29,9 +31,13 @@ public class UIManager : Singleton<UIManager>
     private void HandleGameStateChanged(GameManager.ProcessState currentState, GameManager.ProcessState previousState)
     {
         pauseMenu.gameObject.SetActive(currentState == GameManager.ProcessState.Paused);
+
+        endGameMenu.gameObject.SetActive(
+            currentState == GameManager.ProcessState.Defeat 
+            || currentState == GameManager.ProcessState.Victory);
+        endGameMenu.ShowVictoryText(currentState == GameManager.ProcessState.Victory);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (GameManager.Instance.CurrentProcessState != GameManager.ProcessState.Pregame) return;

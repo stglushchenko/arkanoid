@@ -14,7 +14,9 @@ namespace Assets.Scripts {
         {
             Pregame,
             Running,
-            Paused
+            Paused,
+            Defeat,
+            Victory
         }
         public ProcessState CurrentProcessState { get; private set; } = ProcessState.Pregame;
         public GameState GameState { get; private set; }
@@ -83,9 +85,9 @@ namespace Assets.Scripts {
             switch (CurrentProcessState)
             {
                 case ProcessState.Pregame:
-                    Time.timeScale = 1f;
-                    break;
                 case ProcessState.Running:
+                case ProcessState.Victory:
+                case ProcessState.Defeat:
                     Time.timeScale = 1f;
                     break;
                 case ProcessState.Paused:
@@ -155,6 +157,16 @@ namespace Assets.Scripts {
         public void RestartGame()
         {
             UpdateProcessState(ProcessState.Pregame);
+        }
+
+        public void Victory()
+        {
+            UpdateProcessState(ProcessState.Victory);
+        }
+
+        public void Defeat()
+        {
+            UpdateProcessState(ProcessState.Defeat);
         }
 
         public void QuitGame()

@@ -15,9 +15,15 @@ namespace Assets.Scripts.StateManagement
         {
             PaddleState = new PaddleState();
             BallStates = new List<BallState>();
-            Lives = 10;
+            Lives = 5;
             HudState = new HudState {LivesCount = Lives};
             BricksContainerState = new BricksContainerState();
+            BricksContainerState.NoMoreBricks += BricksContainerState_NoMoreBricks;
+        }
+
+        private void BricksContainerState_NoMoreBricks()
+        {
+            GameManager.Instance.Victory();
         }
 
         public BallState BallSpawned()
@@ -38,6 +44,10 @@ namespace Assets.Scripts.StateManagement
             if (Lives > 0)
             {
                 PaddleState.SpawnNewBall();
+            }
+            else
+            {
+                GameManager.Instance.Defeat();
             }
         }
 
