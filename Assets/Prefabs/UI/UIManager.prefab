@@ -1273,7 +1273,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Yet another arcanoid
+  m_Text: Yet another arkanoid
 --- !u!1 &1494628040338012842
 GameObject:
   m_ObjectHideFlags: 0
